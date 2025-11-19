@@ -1,28 +1,17 @@
-<?php
-$pokaz = isset($_GET['pokaz']); // sprawdza, czy kliknięto przycisk
-?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Jedna strona PHP</title>
+    <title>Wynik skryptu PHP</title>
 </head>
 <body>
-
-<?php if (!$pokaz): ?>
-    <!-- Widok startowy -->
-    <h1>Kliknij, aby wyświetlić treść skryptu</h1>
-    <a href="?pokaz=1">Pokaż wynik skryptu</a>
-
-<?php else: ?>
-    <!-- Wyświetlenie treści skryptu -->
     <h1>Wynik skryptu PHP</h1>
-
+    
     <?php
     // Definicja zmiennych i wyświetlanie tekstu
     $zmienna = "Witaj, świecie!";
     echo "<p>$zmienna</p>";
-    echo "<p>Hmmmm.... co tu jeszcze napisać?</p>";
+    echo "<p> Hmmmm....  co tu jeszcze napisać?</p>";
 
     // Warunkowe wyświetlanie tekstu
     if (true) {
@@ -50,20 +39,16 @@ $pokaz = isset($_GET['pokaz']); // sprawdza, czy kliknięto przycisk
     echo "</ul>";
 
     // Wyświetlanie posortowanej tablicy
-    sort($macierz);
+    sort($macierz); // Sortowanie tablicy
     echo "<h2>Posortowane elementy macierzy:</h2>";
     echo "<ul>";
-    for ($i = 0; $i < count($macierz); $i++) {
-        echo "<li>Posortowany element macierzy: $macierz[$i]</li>";
+    for ($i = 0; $i < 32; $i++) {
+        echo "<li>Posortowany element macierzy: " . $macierz[$i] . "</li>";
     }
     echo "</ul>";
 
+    // Zakończenie skryptu
     echo "<p>Skrypt zakończony.</p>";
     ?>
-
-    <p><a href="index.php">Powrót</a></p>
-
-<?php endif; ?>
-
 </body>
 </html>
