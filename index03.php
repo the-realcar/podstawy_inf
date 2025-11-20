@@ -1,20 +1,6 @@
 <?php
 $pokaz = isset($_GET['pokaz']); // sprawdza, czy kliknięto przycisk
-
-// Połączenie z bazą danych
-$host = 'localhost';
-$user = 'cosinus';
-$password = 'Cosinus';  // Zwykle puste hasło dla XAMPP/WAMP
-$dbname = 'postgres'; // Nazwa bazy danych
-
-$conn = mysqli_connect($host, $user, $password, $dbname);
-
-// Sprawdzenie połączenia
-if (!$conn) {
-    die("Połączenie z bazą danych nieudane: " . mysqli_connect_error());
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -73,25 +59,6 @@ if (!$conn) {
     echo "</ul>";
 
     echo "<p>Skrypt zakończony.</p>";
-
-    // Pobieranie danych z bazy danych
-    $sql = "SELECT * FROM tabela"; // Zmień 'tabela' na nazwę swojej tabeli
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-        echo "<h2>Dane z bazy danych:</h2>";
-        echo "<ul>";
-        while($row = mysqli_fetch_assoc($result)) {
-            // Zmień 'kolumna1' i 'kolumna2' na odpowiednie nazwy kolumn w swojej tabeli
-            echo "<li>" . $row['kolumna1'] . " - " . $row['kolumna2'] . "</li>";
-        }
-        echo "</ul>";
-    } else {
-        echo "<p>Brak wyników w bazie danych.</p>";
-    }
-
-    // Zamknięcie połączenia
-    mysqli_close($conn);
     ?>
 
     <p><a href="index.php">Powrót</a></p>
