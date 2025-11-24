@@ -1,17 +1,21 @@
 <?php
 $pokaz = isset($_GET['pokaz']); // sprawdza, czy kliknięto przycisk
 
-// Połączenie z bazą danych
+// Połączenie z bazą danych PostgreSQL
 $host = 'localhost';
 $user = 'cosinus';
-$password = 'Cosinus';  // Zwykle puste hasło dla XAMPP/WAMP
-$dbname = 'postgres'; // Nazwa bazy danych
+$password = 'Cosinus';
+$dbname = 'postgres';
 
-$conn = mysqli_connect($host, $user, $password, $dbname);
+// Łączenie (connection string)
+$conn_string = "host=$host dbname=$dbname user=$user password=$password";
+
+// Połączenie
+$conn = pg_connect($conn_string);
 
 // Sprawdzenie połączenia
 if (!$conn) {
-    die("Połączenie z bazą danych nieudane: " . mysqli_connect_error());
+    die("Połączenie z bazą danych PostgreSQL nieudane.");
 }
 ?>
 
@@ -74,15 +78,15 @@ if (!$conn) {
 
     echo "<p>Skrypt zakończony.</p>";
 
-    // Pobieranie danych z bazy danych
-    $sql = "SELECT * FROM tabela"; // Zmień 'tabela' na nazwę swojej tabeli
-    $result = mysqli_query($conn, $sql);
+    // Pobieranie danych z bazy danych PostgreSQL
+    $sql = "SELECT * FROM tabela"; // Zmień 'tabela' na swoją tabelę
+    $result = pg_query($conn, $sql);
 
-    if (mysqli_num_rows($result) > 0) {
+    if ($result && pg_num_rows($result) > 0) {
         echo "<h2>Dane z bazy danych:</h2>";
         echo "<ul>";
-        while($row = mysqli_fetch_assoc($result)) {
-            // Zmień 'kolumna1' i 'kolumna2' na odpowiednie nazwy kolumn w swojej tabeli
+        while ($row = pg_fetch_assoc($result)) {
+            // Zmień nazwy kolumn na prawidłowe
             echo "<li>" . $row['kolumna1'] . " - " . $row['kolumna2'] . "</li>";
         }
         echo "</ul>";
@@ -91,7 +95,7 @@ if (!$conn) {
     }
 
     // Zamknięcie połączenia
-    mysqli_close($conn);
+    pg_close($conn);
     ?>
 
     <p><a href="index.php">Powrót</a></p>
